@@ -52,3 +52,23 @@ def adjust_columns(df):
     data1.columns = ['id', 'accessionNumber', 'artist', 'artistRole', 'artistId', 'title', 'dateText', 'medium', 'creditLine', 'year', 'acquisitionYear', 'dimensions', 'width', 'height', 'depth', 'units', 'inscription', 'thumbnailCopyright', 'thumbnail', 'url']
     print('\nRenamed columns:\n', data1.columns)
 
+def index_filter(df):
+    """ Practice accessing and filtering elements using loc/iloc
+    :param df: pandas dataframe containing artwork information
+    """
+
+    print('\n\n***** Indexing and Filtering Section ****')
+    print('\nId column:\n', df['id'])
+    print('\nSelect multiple columns:\n', df[['artist', 'title']])
+    print('\nSelect range of rows with one column:\n', df[1:5]['artist'])
+    print('\nGet rows where year > 1800:\n', df[df['year'] > 1800])
+    print('\nOnly show year column for above condition:\n', df[df['year'] > 1800]['year'])
+    print('\nGet first row, all cols using loc:\n', df.loc[0, :])
+    print('\nGet first three rows, all cols with loc:\n', df.loc[0:2, :])
+    print('\nRange of rows/cols using loc:\n', df.loc[[1, 5], ['artist', 'title']])
+    print('\nFiltering using loc:\n', df.loc[df['artist'] == 'Blake, Robert', :])
+    print('\nGet range of rows, cols using iloc:\n', df.iloc[0:3, 0:3])
+    print('\nUse contains method to check condition on medium column:\n', df.medium.str.contains('Graphite'))
+    print('\nUse contains and loc to filter on medium column:\n', df.loc[df.medium.str.contains('graphite|line', case=False, regex=True), ['artist', 'medium']])
+    print('\nUse contains and loc to filter on year column:\n', df.loc[df['year'].astype(str).str.contains('1826'), :])
+
